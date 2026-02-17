@@ -1252,8 +1252,8 @@ MonoBehaviour:
   bestScore: {fileID: 1463874274}
   homeBtn: {fileID: 978605786}
   boardBuilder: {fileID: 968048166}
-  rows: 3
-  columns: 6
+  rows: 4
+  columns: 4
   movesCount: 0
   matches: 0
   allMatchesNum: 0
