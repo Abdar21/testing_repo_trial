@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MemoryGameController : MonoBehaviour
 {
     public static MemoryGameController Instance { get; private set; }
+    public Fader[] pages;
+
+    [Header("MainMenu")]
+    public TextMeshProUGUI bestScore;
 
     [Header("Cards Board Builder")]
     public CardsBoardBuilder boardBuilder;
+
     [Header("Layout")]
     [Min(1)][SerializeField] private int rows = 4;
     [Min(1)][SerializeField] private int columns = 4;
@@ -20,6 +26,8 @@ public class MemoryGameController : MonoBehaviour
     public int allMatchesNum= 0;
     public int score= 0;
     public int scoreCombo= 1;
+    public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI scoreComboTxt;
 
     public List<Card> cards;
 
@@ -50,7 +58,9 @@ public class MemoryGameController : MonoBehaviour
         secondSelected = -1;
 
         score = 0;
-        scoreCombo = 1;
+        PlusScore(0);
+        scoreTxt.text = score.ToString();
+
         StartGame();
     }
     public void StartGame()
@@ -109,6 +119,7 @@ public class MemoryGameController : MonoBehaviour
             cards[f].MatchedCard();
             cards[s].MatchedCard();
             matches++;
+            PlusScore(5);
             if (matches == allMatchesNum)
             {
                 GamesOver();
@@ -118,10 +129,31 @@ public class MemoryGameController : MonoBehaviour
         {
             cards[f].HideCard();
             cards[s].HideCard();
+            PlusScore(0);
         }
     }
 
+    public void PlusScore(int value)
+    {
+        if(value == 0)
+        {
+            scoreCombo = 1;
+            scoreComboTxt.GetComponent<Fader>().FadeOutAndDisable();
+            return;
+            
+        }
 
+        if (scoreCombo >= 2)
+        {
+            scoreComboTxt.text = "x" + scoreCombo;
+            scoreComboTxt.gameObject.SetActive(true);
+        }
+        score += value * scoreCombo;
+
+        scoreTxt.text = score.ToString();
+
+        scoreCombo++;
+    }
     void GamesOver()
     {
         
