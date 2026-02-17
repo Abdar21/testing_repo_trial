@@ -31,8 +31,8 @@ public class CardsBoardBuilder : MonoBehaviour
 
     private void OnEnable()
     {
-        if (rebuildOnStart)
-            Build(rows, columns);
+        //if (rebuildOnStart)
+        //    Build(rows, columns);
     }
 
     public List<Card> Build(int newRows, int newColumns)

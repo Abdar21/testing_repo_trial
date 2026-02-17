@@ -13,7 +13,6 @@ public class Card : MonoBehaviour
     {
         cardIndex = index;
         cardListIndex = listIndex;
-        GetComponentInChildren<TextMeshProUGUI>(true).text = index.ToString();
         transform.GetChild(1).GetComponent<Image>().sprite = sp;
     }
 
@@ -23,16 +22,16 @@ public class Card : MonoBehaviour
             return;
 
         ShowCard();
-        MemoryGameController.Instance.OnCardFlip(cardIndex);
+        MemoryGameController.Instance.OnCardFlip(cardListIndex);
     }
     public void ShowCard()
     {
         isFlipped = true;
-        transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() =>
+        transform.DORotate(new Vector3(0, 90, 0), 0.35f).OnComplete(() =>
         {
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
-            transform.DORotate(new Vector3(0, 0, 0), 0.5f).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, 0), 0.35f).OnComplete(() =>
             {
                 //
             });
@@ -41,19 +40,18 @@ public class Card : MonoBehaviour
     public void HideCard()
     {
         isFlipped = false;
-        transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() =>
+        transform.DORotate(new Vector3(0, 90, 0), 0.35f).OnComplete(() =>
         {
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
-            transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+            transform.DORotate(new Vector3(0, 0, 0), 0.35f);
         });
     }
     public void MatchedCard()
     {
-        isFlipped = false;
-        transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.5f).OnComplete(() =>
+        transform.DOScale(new Vector3(1.25f, 1.25f, 1.25f), 0.3f).OnComplete(() =>
         {
-            transform.DOScale(new Vector3(1, 1, 1), 0.5f);
+            transform.DOScale(new Vector3(1, 1, 1), 0.3f);
         });
     }
     public void EnableButton()
