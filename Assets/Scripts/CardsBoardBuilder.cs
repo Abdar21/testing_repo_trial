@@ -9,10 +9,7 @@ public class CardsBoardBuilder : MonoBehaviour
 
     [Header("Card Prefab (UI)")]
     [SerializeField] private GameObject cardPrefab;
-
-    [Header("Layout")]
-    [Min(1)][SerializeField] private int rows = 4;
-    [Min(1)][SerializeField] private int columns = 4;
+    
 
     [Header("Sizing")]
     [SerializeField] private bool keepSquareCells = true;
@@ -22,18 +19,14 @@ public class CardsBoardBuilder : MonoBehaviour
     [SerializeField] private Sprite[] cardFaceSprites;
 
     private RectTransform _boardRect;
-
+    private int rows = 4;
+    private int columns = 4;
     private void Awake()
     {
         if (grid == null) grid = GetComponent<GridLayoutGroup>();
         _boardRect = grid != null ? grid.GetComponent<RectTransform>() : null;
     }
 
-    private void OnEnable()
-    {
-        //if (rebuildOnStart)
-        //    Build(rows, columns);
-    }
 
     public List<Card> Build(int newRows, int newColumns)
     {
@@ -137,8 +130,6 @@ public class CardsBoardBuilder : MonoBehaviour
         }
     }
 
-    public void SetLayoutAndRebuild(int newRows, int newColumns)
-    {
-        Build(newRows, newColumns);
-    }
+
+
 }

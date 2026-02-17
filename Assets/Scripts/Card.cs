@@ -56,11 +56,11 @@ public class Card : MonoBehaviour
     }
     public void EnableButton()
     {
-        GetComponent<Button>().enabled = true;
+        GetComponent<Button>().interactable = true;
     }
     public void DisableButton()
     {
-        GetComponent<Button>().enabled = false;
+        GetComponent<Button>().interactable = false;
     }
 
     
